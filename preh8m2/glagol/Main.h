@@ -1,19 +1,18 @@
+// Prehvurlyach-8M 1.1 
+// Author: Todor Arnaudov, aka Tosh/TodProg/Twenkid
 
 #define CM_KRATKO       9045
 #define CM_DULGO        9046
 #define CM_MREJ         9047
-#define ID_NATIS        9048     //Натискалце
-#define ID_BMP          9050     //Знак на "Правец"
-#define ID_BMP2         9051    //Надпис
-#define ID_BMP3         9052    //Надпис
+#define ID_NATIS        9048     //РќР°С‚РёСЃРєР°Р»С†Рµ
+#define ID_BMP          9050     //Р—РЅР°Рє РЅР° "РџСЂР°РІРµС†"
+#define ID_BMP2         9051    //РќР°РґРїРёСЃ
+#define ID_BMP3         9052    //РќР°РґРїРёСЃ
 
-#define CM_CHETI_EDIN	9067    //Чете отделен звукозапис
-#define CM_CHETI_ZARUKI  9068    //Чете свитък с много записи за обработка
+#define CM_CHETI_EDIN	9067    //Р§РµС‚Рµ РѕС‚РґРµР»РµРЅ Р·РІСѓРєРѕР·Р°РїРёСЃ
+#define CM_CHETI_ZARUKI  9068    //Р§РµС‚Рµ СЃРІРёС‚СЉРє СЃ РјРЅРѕРіРѕ Р·Р°РїРёСЃРё Р·Р° РѕР±СЂР°Р±РѕС‚РєР°
 #define CM_FILE_SAVEAS	9072
 #define CM_FILE_EXIT	9071
 #define CM_FILE_OPEN	9070
 #define CM_FILE_INTERNET 9073
 #define CM_EZIK          9065
-
-
-
