@@ -1,5 +1,5 @@
 # Pravetz8M_Prehvurlyach
-Transfer diskettes from Apple][ and its clones like Pravetz-8M and 82 through the audio cassette port.
+Transfer diskettes from Apple][ and its clones like Pravetz-8M and 82 through the audio cassette port. Code in C and BASIC. Documentation in HTML.
 
 ПРЕХВЪРЛЯЧ-8М. ВЕРСИЯ 1.1
 
