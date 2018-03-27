@@ -1,3 +1,5 @@
+// Author: Todor Arnaudov, aka Tosh/TodProg/Twenkid
+
 500 ICON MOVEABLE PURE LOADONCALL DISCARDABLE "C:/DEV-C_~1/BIN/Mainicon.ico"
 ID_BMP BITMAP LOADONCALL MOVEABLE "C:/CPP_moi/8M_C/znaksivo.bmp"
 ID_BMP2 BITMAP LOADONCALL MOVEABLE "C:/CPP_moi/8M_C/nadpis.bmp"
@@ -7,20 +9,20 @@ ID_BMP3 BITMAP LOADONCALL MOVEABLE "C:/CPP_moi/8M_C/znaksivo.bmp"
 
 MAINMENU MENU 
 {
- POPUP "&Свитък"
+ POPUP "&РЎРІРёС‚СЉРє"
  {
-  MENUITEM "Преобразувай звукозапис...", CM_CHETI_EDIN
-  MENUITEM "Много наведнъж...", CM_CHETI_ZARUKI
-//  MENUITEM "Запиши &Като...", CM_FILE_SAVEAS
+  MENUITEM "РџСЂРµРѕР±СЂР°Р·СѓРІР°Р№ Р·РІСѓРєРѕР·Р°РїРёСЃ...", CM_CHETI_EDIN
+  MENUITEM "РњРЅРѕРіРѕ РЅР°РІРµРґРЅСЉР¶...", CM_CHETI_ZARUKI
+//  MENUITEM "Р—Р°РїРёС€Рё &РљР°С‚Рѕ...", CM_FILE_SAVEAS
   MENUITEM SEPARATOR
-  MENUITEM "Из&ход", CM_FILE_EXIT
+  MENUITEM "РР·&С…РѕРґ", CM_FILE_EXIT
  }
 
- POPUP "&Помощ"
+ POPUP "&РџРѕРјРѕС‰"
  {
-  MENUITEM "&Прехвърляч-8М", CM_KRATKO
-  MENUITEM "&Какво да правя?", CM_DULGO
-  MENUITEM "&В Мрежата", CM_MREJ
+  MENUITEM "&РџСЂРµС…РІСЉСЂР»СЏС‡-8Рњ", CM_KRATKO
+  MENUITEM "&РљР°РєРІРѕ РґР° РїСЂР°РІСЏ?", CM_DULGO
+  MENUITEM "&Р’ РњСЂРµР¶Р°С‚Р°", CM_MREJ
  }
 
 /*
@@ -41,7 +43,7 @@ MAINMENU2 MENU
   MENUITEM "&Open record...", CM_CHETI_EDIN
   MENUITEM "Write info &As...", CM_FILE_SAVEAS
   MENUITEM SEPARATOR
-  MENUITEM "E&хit", CM_FILE_EXIT
+  MENUITEM "E&С…it", CM_FILE_EXIT
  }
 
  POPUP "&Help"
@@ -49,9 +51,9 @@ MAINMENU2 MENU
   MENUITEM "&Transferrer 0.1", CM_KRATKO
  }
 
-  POPUP "&Език"
+  POPUP "&Р•Р·РёРє"
  {
-  MENUITEM "&Български", CM_EZIK
+  MENUITEM "&Р‘СЉР»РіР°СЂСЃРєРё", CM_EZIK
  }
 
 }
