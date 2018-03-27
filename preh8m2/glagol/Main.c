@@ -1,19 +1,20 @@
 /*
-ПРЕХВЪРЛЯЧ-8М
+РџР Р•РҐР’РЄР Р›РЇР§-8Рњ
 
-Система за предаване на данни между Правец-82/8М (с изход за касетофон) и IBM-PC със звукова платка.
-Първа версия: 6.2001; Pascal (MS DOS) и BASIC (Apple DOS 3.3)
-Първа официална: 1.0, 12.2002 (MS Windows-32, BASIC)
-Поправка: 1.1, 1.2004 (MS Windows-32, BASIC)
+РЎРёСЃС‚РµРјР° Р·Р° РїСЂРµРґР°РІР°РЅРµ РЅР° РґР°РЅРЅРё РјРµР¶РґСѓ РџСЂР°РІРµС†-82/8Рњ (СЃ РёР·С…РѕРґ Р·Р° РєР°СЃРµС‚РѕС„РѕРЅ) Рё IBM-PC СЃСЉСЃ Р·РІСѓРєРѕРІР° РїР»Р°С‚РєР°.
+РџСЉСЂРІР° РІРµСЂСЃРёСЏ: 6.2001; Pascal (MS DOS) Рё BASIC (Apple DOS 3.3)
+РџСЉСЂРІР° РѕС„РёС†РёР°Р»РЅР°: 1.0, 12.2002 (MS Windows-32, BASIC)
+РџРѕРїСЂР°РІРєР°: 1.1, 1.2004 (MS Windows-32, BASIC)
 
-9.8.2002 - приемане на провлачени записи.
-22.12.2002 - много работа наведнъж, за да се събере приложение
-Засега всичко накуп. Може би ще се раздели на съставки.
+9.8.2002 - РїСЂРёРµРјР°РЅРµ РЅР° РїСЂРѕРІР»Р°С‡РµРЅРё Р·Р°РїРёСЃРё.
+22.12.2002 - РјРЅРѕРіРѕ СЂР°Р±РѕС‚Р° РЅР°РІРµРґРЅСЉР¶, Р·Р° РґР° СЃРµ СЃСЉР±РµСЂРµ РїСЂРёР»РѕР¶РµРЅРёРµ
+Р—Р°СЃРµРіР° РІСЃРёС‡РєРѕ РЅР°РєСѓРї. РњРѕР¶Рµ Р±Рё С‰Рµ СЃРµ СЂР°Р·РґРµР»Рё РЅР° СЃСЉСЃС‚Р°РІРєРё.
 
-26.12.2002 - първа достъпна за потребители версия
+26.12.2002 - РїСЉСЂРІР° РґРѕСЃС‚СЉРїРЅР° Р·Р° РїРѕС‚СЂРµР±РёС‚РµР»Рё РІРµСЂСЃРёСЏ
 
-10.1.2004 - версия 1.1; поправена грешка при декодиране при първи знак; разкрити глаголи
+10.1.2004 - РІРµСЂСЃРёСЏ 1.1; РїРѕРїСЂР°РІРµРЅР° РіСЂРµС€РєР° РїСЂРё РґРµРєРѕРґРёСЂР°РЅРµ РїСЂРё РїСЉСЂРІРё Р·РЅР°Рє; СЂР°Р·РєСЂРёС‚Рё РіР»Р°РіРѕР»Рё
 
+Author: Todor Arnaudov, aka Tosh/TodProg/Twenkid
 */
 
 #include <windows.h>
@@ -21,50 +22,50 @@
 #include <io.h>
 #include <process.h> //_spawn_..., _exec...
 #include <winuser.h> //setwindowtext
-//#include <mmsystem.h> //Звук
+//#include <mmsystem.h> //Р—РІСѓРє
 
 #pragma hdrstop
 
 #include "Main.h"
 
 #define IDC_MAIN_TEXT   1001
-#define ID_BUTTON1      1   //натискало_1
-#define RAZSHIRENIE     ".d"    //разширение
+#define ID_BUTTON1      1   //РЅР°С‚РёСЃРєР°Р»Рѕ_1
+#define RAZSHIRENIE     ".d"    //СЂР°Р·С€РёСЂРµРЅРёРµ
 #define FALSE 0
 #define TRUE  1
 #define DA    1
 #define NE    0
-#define OS   128        //хълмовете се отчитат спрямо оста
-#define maxa 2000000	//за да няма четене на порции
+#define OS   128        //С…СЉР»РјРѕРІРµС‚Рµ СЃРµ РѕС‚С‡РёС‚Р°С‚ СЃРїСЂСЏРјРѕ РѕСЃС‚Р°
+#define maxa 2000000	//Р·Р° РґР° РЅСЏРјР° С‡РµС‚РµРЅРµ РЅР° РїРѕСЂС†РёРё
 
 
-#define ZAGLAVIE         "ПРЕХВЪРЛЯЧ-8М"
+#define ZAGLAVIE         "РџР Р•РҐР’РЄР Р›РЇР§-8Рњ"
 #define ZAGLAVIE_ENG_N   "Transferrer-8M"
-#define GRESHKA_N        "Грешка"
-#define VUOB_N           "ПРЕХВЪРЛЯЧ-8М е система за еднопосочно предаване на данни от Правец-82 и 8M към IBM-PC, създадена от Тодор Арнаудов (Тош).\nПърва работеща версия: юни 2001.\nПърва обявена: 1.0 от 26-ти декември 2002\n1.1 от 10.1.2004"
-#define ZA_PREH_N        "Накратко"
+#define GRESHKA_N        "Р“СЂРµС€РєР°"
+#define VUOB_N           "РџР Р•РҐР’РЄР Р›РЇР§-8Рњ Рµ СЃРёСЃС‚РµРјР° Р·Р° РµРґРЅРѕРїРѕСЃРѕС‡РЅРѕ РїСЂРµРґР°РІР°РЅРµ РЅР° РґР°РЅРЅРё РѕС‚ РџСЂР°РІРµС†-82 Рё 8M РєСЉРј IBM-PC, СЃСЉР·РґР°РґРµРЅР° РѕС‚ РўРѕРґРѕСЂ РђСЂРЅР°СѓРґРѕРІ (РўРѕС€).\nРџСЉСЂРІР° СЂР°Р±РѕС‚РµС‰Р° РІРµСЂСЃРёСЏ: СЋРЅРё 2001.\nРџСЉСЂРІР° РѕР±СЏРІРµРЅР°: 1.0 РѕС‚ 26-С‚Рё РґРµРєРµРјРІСЂРё 2002\n1.1 РѕС‚ 10.1.2004"
+#define ZA_PREH_N        "РќР°РєСЂР°С‚РєРѕ"
 #define VUOB_ENG_N       "TRANSFERRER - a programme that allows diskettes from Apple\\ to be transferred to a PC"
 #define ZA_PREH_ENG_N    "About"
-#define OBEDINI          "#" //знак за сливане на изброените свитъци
-#define IZPULNEN         " - изпълнен."
+#define OBEDINI          "#" //Р·РЅР°Рє Р·Р° СЃР»РёРІР°РЅРµ РЅР° РёР·Р±СЂРѕРµРЅРёС‚Рµ СЃРІРёС‚СЉС†Рё
+#define IZPULNEN         " - РёР·РїСЉР»РЅРµРЅ."
 
 #define NEPISHI 1
 
 static char g_szClassName[] = "MyWindowClass";
 static HINSTANCE g_hInst = NULL;
-HWND bmp, bmp2;   //Знак на "Правец"
-HWND nadpis;     //"Прехвърляч-8М"
+HWND bmp, bmp2;   //Р—РЅР°Рє РЅР° "РџСЂР°РІРµС†"
+HWND nadpis;     //"РџСЂРµС…РІСЉСЂР»СЏС‡-8Рњ"
 HWND natis;
 HWND pole;
-HMENU h_menu;    //избирач
+HMENU h_menu;    //РёР·Р±РёСЂР°С‡
 char put[255];
-char dada[16000]; //написано в работното поле
-bool ezik = 1; //1 - български, 0 - английски
+char dada[16000]; //РЅР°РїРёСЃР°РЅРѕ РІ СЂР°Р±РѕС‚РЅРѕС‚Рѕ РїРѕР»Рµ
+bool ezik = 1; //1 - Р±СЉР»РіР°СЂСЃРєРё, 0 - Р°РЅРіР»РёР№СЃРєРё
 int broi;
 HDROP drop;
 
 
-//Прозорци
+//РџСЂРѕР·РѕСЂС†Рё
 #define PRAZNO        5
 
 #define PREH_X        PRAZNO
@@ -89,8 +90,8 @@ HDROP drop;
 #define POLE_SHIR     160//230
 #define POLE_VIS      110
 
-#define CR 13             //"Връщане на каретката"
-#define LF 10             //Нов ред
+#define CR 13             //"Р’СЂСЉС‰Р°РЅРµ РЅР° РєР°СЂРµС‚РєР°С‚Р°"
+#define LF 10             //РќРѕРІ СЂРµРґ
 char novredm[2];
 
 //8M
@@ -102,17 +103,17 @@ uchar nula   = 127;
 uchar nul    = 48;
 uchar edn    = 49;
 uchar tonnac = 50;
-uchar nad; // над нулевото ниво
-uchar pod; // под нулевото ниво
-uchar biti; //байта под чертата
+uchar nad; // РЅР°Рґ РЅСѓР»РµРІРѕС‚Рѕ РЅРёРІРѕ
+uchar pod; // РїРѕРґ РЅСѓР»РµРІРѕС‚Рѕ РЅРёРІРѕ
+uchar biti; //Р±Р°Р№С‚Р° РїРѕРґ С‡РµСЂС‚Р°С‚Р°
 uchar bitove;
-uchar bait; //нов байт
+uchar bait; //РЅРѕРІ Р±Р°Р№С‚
 uchar broo,pro;
 uchar ff=255;
 uchar tek;
 
-uchar* poin; 	//данни []
-uchar* dekod;  //изходен свитък
+uchar* poin; 	//РґР°РЅРЅРё []
+uchar* dekod;  //РёР·С…РѕРґРµРЅ СЃРІРёС‚СЉРє
 
 char nov[255];
 char pyt[255];
@@ -137,50 +138,50 @@ int otvorif();
 
 void poch()
 {
-novredm[0]=CR;       //Нов ред
+novredm[0]=CR;       //РќРѕРІ СЂРµРґ
 novredm[1]=LF;
 }
 
 
-//Да се раздели обработката на данните с извеждането, за бъде
-//лесно пренасянето на различни платформи
+//Р”Р° СЃРµ СЂР°Р·РґРµР»Рё РѕР±СЂР°Р±РѕС‚РєР°С‚Р° РЅР° РґР°РЅРЅРёС‚Рµ СЃ РёР·РІРµР¶РґР°РЅРµС‚Рѕ, Р·Р° Р±СЉРґРµ
+//Р»РµСЃРЅРѕ РїСЂРµРЅР°СЃСЏРЅРµС‚Рѕ РЅР° СЂР°Р·Р»РёС‡РЅРё РїР»Р°С‚С„РѕСЂРјРё
 void vurti_windows(char *im)
 {
 
 strcpy(&pyt[0], im);
-vurti();            //Извиква преобразователя
+vurti();            //РР·РІРёРєРІР° РїСЂРµРѕР±СЂР°Р·РѕРІР°С‚РµР»СЏ
 }
 
-int osnova_cheti(char* ime)	//Чете основния свитък с връзки към други
+int osnova_cheti(char* ime)	//Р§РµС‚Рµ РѕСЃРЅРѕРІРЅРёСЏ СЃРІРёС‚СЉРє СЃ РІСЂСЉР·РєРё РєСЉРј РґСЂСѓРіРё
 {
 FILE *f;
 char c[255];
-short p;        //парчета
+short p;        //РїР°СЂС‡РµС‚Р°
 short int pr = 0, zp =0;
 
 f = fopen(&ime[0], "rt");
 
    do{
-if (!fscanf(f, "%s", &c[0])) return(DA);  //Ако няма какво повече да чете
+if (!fscanf(f, "%s", &c[0])) return(DA);  //РђРєРѕ РЅСЏРјР° РєР°РєРІРѕ РїРѕРІРµС‡Рµ РґР° С‡РµС‚Рµ
 
-if (strcmp(&c[0], OBEDINI) == 0)	//Име на свитък, който ще се сглобява от частите
+if (strcmp(&c[0], OBEDINI) == 0)	//РРјРµ РЅР° СЃРІРёС‚СЉРє, РєРѕР№С‚Рѕ С‰Рµ СЃРµ СЃРіР»РѕР±СЏРІР° РѕС‚ С‡Р°СЃС‚РёС‚Рµ
    {
    return(DA);
    }
 
-if (strcmp(&c[0], "0") == 0)	//Край
+if (strcmp(&c[0], "0") == 0)	//РљСЂР°Р№
    {
    return(DA);
    }
 
 vurti_windows(&c[0]);
 
-}while (p < 1000);// до тук не се стига
+}while (p < 1000);// РґРѕ С‚СѓРє РЅРµ СЃРµ СЃС‚РёРіР°
 
 }
-//--край на чети_основа--//
+//--РєСЂР°Р№ РЅР° С‡РµС‚Рё_РѕСЃРЅРѕРІР°--//
 
-void mahniraz(char *c)    //Работи направо с низа, 22.12.2002, маха разширение
+void mahniraz(char *c)    //Р Р°Р±РѕС‚Рё РЅР°РїСЂР°РІРѕ СЃ РЅРёР·Р°, 22.12.2002, РјР°С…Р° СЂР°Р·С€РёСЂРµРЅРёРµ
 {
 short m = 0;
 
@@ -193,7 +194,7 @@ void izchisti()
 {
  broi=0;
  poin = new unsigned char[maxa];
- dekod = new unsigned char[145000];//изходен файл
+ dekod = new unsigned char[145000];//РёР·С…РѕРґРµРЅ С„Р°Р№Р»
 }
 
 unsigned char stepen(unsigned char stp)
@@ -208,8 +209,8 @@ void zapishi()
  long fsz;
  int  razi;
 
-zap = fopen(nov,"wb");		//Изходен свитък с разчетената информация
-fwrite(dekod,1,broi-1,zap);	//Последният байт е за надзор на грешки - изключва се
+zap = fopen(nov,"wb");		//РР·С…РѕРґРµРЅ СЃРІРёС‚СЉРє СЃ СЂР°Р·С‡РµС‚РµРЅР°С‚Р° РёРЅС„РѕСЂРјР°С†РёСЏ
+fwrite(dekod,1,broi-1,zap);	//РџРѕСЃР»РµРґРЅРёСЏС‚ Р±Р°Р№С‚ Рµ Р·Р° РЅР°РґР·РѕСЂ РЅР° РіСЂРµС€РєРё - РёР·РєР»СЋС‡РІР° СЃРµ
 fclose(zap);
 
  _finddata_t fi2;
@@ -218,15 +219,15 @@ _findfirst(nov, &fi2);
 char gaga[255];
 wsprintf(&gaga[0],"%s, %d %s",fi2.name, fi2.size, /*greshnoli,*/ &novredm[0]);
 strcat(&dada[0], gaga);
-SetWindowText(pole, &dada[0]);	//Извежда в словното поле размера
+SetWindowText(pole, &dada[0]);	//РР·РІРµР¶РґР° РІ СЃР»РѕРІРЅРѕС‚Рѕ РїРѕР»Рµ СЂР°Р·РјРµСЂР°
 }
 
-void usili()		//Усилване на звука
+void usili()		//РЈСЃРёР»РІР°РЅРµ РЅР° Р·РІСѓРєР°
 {
 int m;
 uchar max = os, min = os;
 
-for (m = 300; m<siz; m+= 3)	//Прескачаме малко от началото
+for (m = 300; m<siz; m+= 3)	//РџСЂРµСЃРєР°С‡Р°РјРµ РјР°Р»РєРѕ РѕС‚ РЅР°С‡Р°Р»РѕС‚Рѕ
 {
 if (poin[m]>max) max = poin[m];
 }
@@ -263,7 +264,7 @@ void chetipoi()
 
 }
 
-void zapylbait()	//Разчетени са осем последователни бита и се запълва байт
+void zapylbait()	//Р Р°Р·С‡РµС‚РµРЅРё СЃР° РѕСЃРµРј РїРѕСЃР»РµРґРѕРІР°С‚РµР»РЅРё Р±РёС‚Р° Рё СЃРµ Р·Р°РїСЉР»РІР° Р±Р°Р№С‚
 {
  dekod[broi] = bait;
  broi++;
@@ -285,13 +286,13 @@ if(stop) exit(0);
 }
 */
 
-int otvorif() //този връщач върши работата
+int otvorif() //С‚РѕР·Рё РІСЂСЉС‰Р°С‡ РІСЉСЂС€Рё СЂР°Р±РѕС‚Р°С‚Р°
 {
 uchar edn,nul;
 bool bobo=0;
 bool pryv=1;
 char ch;
-long bibi;	//Брояч
+long bibi;	//Р‘СЂРѕСЏС‡
 char *niz[255];
 
 
@@ -301,7 +302,7 @@ char *niz[255];
  pryv=true;
  edn=1;
  nul=0;
- m=44;		//указател във вълновия запис
+ m=44;		//СѓРєР°Р·Р°С‚РµР» РІСЉРІ РІСЉР»РЅРѕРІРёСЏ Р·Р°РїРёСЃ
  poinuk=0;
  bait=0;
  bitove=0;
@@ -317,11 +318,11 @@ if (!_findfirst(pyt, &fi))
        }
  else	
  _findclose(dali);
- poif = fopen(pyt,"rb");        //Чете двоичен
+ poif = fopen(pyt,"rb");        //Р§РµС‚Рµ РґРІРѕРёС‡РµРЅ
  siz = fi.size;
- chetipoi();			//Прочита целия свитък
+ chetipoi();			//РџСЂРѕС‡РёС‚Р° С†РµР»РёСЏ СЃРІРёС‚СЉРє
 
- i = 44; // Прескача заглавието на звукозаписа
+ i = 44; // РџСЂРµСЃРєР°С‡Р° Р·Р°РіР»Р°РІРёРµС‚Рѕ РЅР° Р·РІСѓРєРѕР·Р°РїРёСЃР°
  podd = 0; //false
  poddpred = podd;
 
@@ -333,15 +334,15 @@ if (!_findfirst(pyt, &fi))
  };
 
 
-//Търсач на пусковия бит "1"
+//РўСЉСЂСЃР°С‡ РЅР° РїСѓСЃРєРѕРІРёСЏ Р±РёС‚ "1"
 
 while(i<siz)
  {
   tek = poin[poinuk];
-  podd = (tek > os);				        //Над оста?
-  if ((podd) && (!poddpred)) broo=0;		//Ако предната не е, търси нов хълм
-  if (podd) broo++;				//Увеличи броя на точките от хълма
-  if ((!podd) && (poddpred))			//Край на бит
+  podd = (tek > os);				        //РќР°Рґ РѕСЃС‚Р°?
+  if ((podd) && (!poddpred)) broo=0;		//РђРєРѕ РїСЂРµРґРЅР°С‚Р° РЅРµ Рµ, С‚СЉСЂСЃРё РЅРѕРІ С…СЉР»Рј
+  if (podd) broo++;				//РЈРІРµР»РёС‡Рё Р±СЂРѕСЏ РЅР° С‚РѕС‡РєРёС‚Рµ РѕС‚ С…СЉР»РјР°
+  if ((!podd) && (poddpred))			//РљСЂР°Р№ РЅР° Р±РёС‚
     if ((broo>0) &&  (broo<3)) break; //{zapkude("BEGIN!",i,0); break;}
   poddpred = podd;
   i++;
@@ -351,61 +352,61 @@ while(i<siz)
  poddpred = 0;
  broo = 0;
 
- while(i<siz)	//Преобразуване
+ while(i<siz)	//РџСЂРµРѕР±СЂР°Р·СѓРІР°РЅРµ
   {
    i++;
    m++;
    poinuk++;
    tek = poin[poinuk];
-   podd = (tek > os);				        //Над оста?
-   if ((podd) && (!poddpred)) broo=0;		//Ако предната не е, търси нов хълм
+   podd = (tek > os);				        //РќР°Рґ РѕСЃС‚Р°?
+   if ((podd) && (!poddpred)) broo=0;		//РђРєРѕ РїСЂРµРґРЅР°С‚Р° РЅРµ Рµ, С‚СЉСЂСЃРё РЅРѕРІ С…СЉР»Рј
 
-   if (podd) broo++;				//Брой точките от текущия хълм
-   if ((!podd) && (poddpred))	    //Край на хълм (бит)
+   if (podd) broo++;				//Р‘СЂРѕР№ С‚РѕС‡РєРёС‚Рµ РѕС‚ С‚РµРєСѓС‰РёСЏ С…СЉР»Рј
+   if ((!podd) && (poddpred))	    //РљСЂР°Р№ РЅР° С…СЉР»Рј (Р±РёС‚)
       {
        //zapkude("BROO", broo, 0);
          if ((broo>2) && (broo<5))
                                            {
                                             //zapkude("I", i, 0);
-                                            bait+=stepen(7-bitove);			//Ако е 2 -> 0, ако е 5 -> тонсигнал
+                                            bait+=stepen(7-bitove);			//РђРєРѕ Рµ 2 -> 0, Р°РєРѕ Рµ 5 -> С‚РѕРЅСЃРёРіРЅР°Р»
                                             bitove++;
                                            }
       else
-      if ((broo<3) && (broo>0)) bitove++;	//Открит знак "0"
+      if ((broo<3) && (broo>0)) bitove++;	//РћС‚РєСЂРёС‚ Р·РЅР°Рє "0"
 
       if (bitove==8) {
-                      //zapkude("BYTE", bait, 0); //Завършена осмица битове
+                      //zapkude("BYTE", bait, 0); //Р—Р°РІСЉСЂС€РµРЅР° РѕСЃРјРёС†Р° Р±РёС‚РѕРІРµ
                       zapylbait();
                      }
   }
   poddpred = podd;
 
-  if (m==poi) chetipoi();					//Чете ново парче от свитъка - не се използва на практика
+  if (m==poi) chetipoi();					//Р§РµС‚Рµ РЅРѕРІРѕ РїР°СЂС‡Рµ РѕС‚ СЃРІРёС‚СЉРєР° - РЅРµ СЃРµ РёР·РїРѕР»Р·РІР° РЅР° РїСЂР°РєС‚РёРєР°
 
- }//край на _while_
+ }//РєСЂР°Р№ РЅР° _while_
 
 fclose(poif);
-zapishi();						//Запиши преобразуваните данни
+zapishi();						//Р—Р°РїРёС€Рё РїСЂРµРѕР±СЂР°Р·СѓРІР°РЅРёС‚Рµ РґР°РЅРЅРё
 }
 
-int vurti() //главна функция
+int vurti() //РіР»Р°РІРЅР° С„СѓРЅРєС†РёСЏ
 {
  char zna=0;
   strcpy(nov, pyt);
-  mahniraz(nov);   //Изтрива всичко след ".'
-  strcat(nov, RAZSHIRENIE);   //добавя ново разширение
+  mahniraz(nov);   //РР·С‚СЂРёРІР° РІСЃРёС‡РєРѕ СЃР»РµРґ ".'
+  strcat(nov, RAZSHIRENIE);   //РґРѕР±Р°РІСЏ РЅРѕРІРѕ СЂР°Р·С€РёСЂРµРЅРёРµ
  masauk = 0;
  otvorif();
 }
 
-void osvobodi()           //изчиства паметта
+void osvobodi()           //РёР·С‡РёСЃС‚РІР° РїР°РјРµС‚С‚Р°
 {
 delete[] poin;
 delete[] dekod;
 }
 
 
-BOOL LoadFile(HWND hEdit, LPSTR pszFileName)	//Обособено за Win32; скелетът на връщача е от "Dev C++"
+BOOL LoadFile(HWND hEdit, LPSTR pszFileName)	//РћР±РѕСЃРѕР±РµРЅРѕ Р·Р° Win32; СЃРєРµР»РµС‚СЉС‚ РЅР° РІСЂСЉС‰Р°С‡Р° Рµ РѕС‚ "Dev C++"
 {
    HANDLE hFile;
    BOOL bSuccess = NE;
@@ -420,8 +421,8 @@ BOOL LoadFile(HWND hEdit, LPSTR pszFileName)	//Обособено за Win32; скелетът на в
 
       if (dwFileSize != 0xFFFFFFFF)
       {
-         strcpy(&pyt[0],pszFileName);     //пътя
-         vurti();                        //Единствен свитък
+         strcpy(&pyt[0],pszFileName);     //РїСЉС‚СЏ
+         vurti();                        //Р•РґРёРЅСЃС‚РІРµРЅ СЃРІРёС‚СЉРє
          bSuccess = DA;
       }
       CloseHandle(hFile);
@@ -429,7 +430,7 @@ BOOL LoadFile(HWND hEdit, LPSTR pszFileName)	//Обособено за Win32; скелетът на в
   return bSuccess;
 }
 
-BOOL DoFileOpenSave(HWND hwnd, BOOL bSave, int kazba)     //казба - интрукция. 0 - зарежда един звукозапис; 1 - списък
+BOOL DoFileOpenSave(HWND hwnd, BOOL bSave, int kazba)     //РєР°Р·Р±Р° - РёРЅС‚СЂСѓРєС†РёСЏ. 0 - Р·Р°СЂРµР¶РґР° РµРґРёРЅ Р·РІСѓРєРѕР·Р°РїРёСЃ; 1 - СЃРїРёСЃСЉРє
 {
    OPENFILENAME ofn;
    char szFileName[MAX_PATH];
@@ -440,12 +441,12 @@ BOOL DoFileOpenSave(HWND hwnd, BOOL bSave, int kazba)     //казба - интрукция. 0
    ofn.lStructSize = sizeof(ofn);
    ofn.hwndOwner = hwnd;
 
-if (ezik)		//Неразработена възможност за работа с различни избирачи
-   ofn.lpstrFilter = "Вълнови записи (*.wav)\0*.wav\0Всички свитъци (*.*)\0*.*\0\0";
+if (ezik)		//РќРµСЂР°Р·СЂР°Р±РѕС‚РµРЅР° РІСЉР·РјРѕР¶РЅРѕСЃС‚ Р·Р° СЂР°Р±РѕС‚Р° СЃ СЂР°Р·Р»РёС‡РЅРё РёР·Р±РёСЂР°С‡Рё
+   ofn.lpstrFilter = "Р’СЉР»РЅРѕРІРё Р·Р°РїРёСЃРё (*.wav)\0*.wav\0Р’СЃРёС‡РєРё СЃРІРёС‚СЉС†Рё (*.*)\0*.*\0\0";
 else
   ofn.lpstrFilter = "Wave records (*.wav)\0*.wav\0All files (*.*)\0*.*\0\0";
 if (kazba)
-   ofn.lpstrFilter = "Словесни свитъци (*.txt)\0*.txt\0Всички свитъци\0*.*\0\0";
+   ofn.lpstrFilter = "РЎР»РѕРІРµСЃРЅРё СЃРІРёС‚СЉС†Рё (*.txt)\0*.txt\0Р’СЃРёС‡РєРё СЃРІРёС‚СЉС†Рё\0*.*\0\0";
 
    ofn.lpstrFile = szFileName;
    ofn.nMaxFile = MAX_PATH;
@@ -456,7 +457,7 @@ if (kazba)
    ofn.lpstrDefExt = "txt";
 
 if (ezik)
-   ofn.lpstrFilter = "Словесни свитъци (*.txt)\0*.txt\0Всички свитъци\0*.*\0\0";
+   ofn.lpstrFilter = "РЎР»РѕРІРµСЃРЅРё СЃРІРёС‚СЉС†Рё (*.txt)\0*.txt\0Р’СЃРёС‡РєРё СЃРІРёС‚СЉС†Рё\0*.*\0\0";
 else
    ofn.lpstrFilter = "Text files (*.txt)\0*.txt\0All files\0*.*\0\0";
 
@@ -468,12 +469,12 @@ else
       ofn.Flags = OFN_EXPLORER | OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
       if(GetOpenFileName(&ofn))
       {
-      if (kazba == 1) osnova_cheti(szFileName);    //Бъдещо разширение на броя казби
+      if (kazba == 1) osnova_cheti(szFileName);    //Р‘СЉРґРµС‰Рѕ СЂР°Р·С€РёСЂРµРЅРёРµ РЅР° Р±СЂРѕСЏ РєР°Р·Р±Рё
       else
          {
          if(!LoadFile(GetDlgItem(hwnd, IDC_MAIN_TEXT), szFileName))
           {
-         if (ezik) MessageBox(hwnd, "Неуспешно четене!", GRESHKA_N, MB_OK | MB_ICONEXCLAMATION);
+         if (ezik) MessageBox(hwnd, "РќРµСѓСЃРїРµС€РЅРѕ С‡РµС‚РµРЅРµ!", GRESHKA_N, MB_OK | MB_ICONEXCLAMATION);
          else      MessageBox(hwnd, "Load of file failed.", "Error", MB_OK | MB_ICONEXCLAMATION);
          return FALSE;
           }
@@ -490,7 +491,7 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
       case WM_CREATE:
 
      poch();
-     pole = CreateWindowEx(WS_EX_ACCEPTFILES, "EDIT", "",	//Приема провлачени вълнови свитъци
+     pole = CreateWindowEx(WS_EX_ACCEPTFILES, "EDIT", "",	//РџСЂРёРµРјР° РїСЂРѕРІР»Р°С‡РµРЅРё РІСЉР»РЅРѕРІРё СЃРІРёС‚СЉС†Рё
             WS_VISIBLE | WS_CHILD | WS_BORDER  |WS_CLIPSIBLINGS| WS_TABSTOP
             |ES_MULTILINE| WS_VSCROLL,
             POLE_X, POLE_Y, POLE_SHIR, POLE_VIS,
@@ -502,8 +503,8 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
           PREH_X, PREH_Y , PREH_SHIR, PREH_VIS,
           hwnd, (HMENU)ID_BMP2, g_hInst, NULL);
 
-/*          //Натискалце
-    natis = CreateWindow("BUTTON", "ЧЕТИ",
+/*          //РќР°С‚РёСЃРєР°Р»С†Рµ
+    natis = CreateWindow("BUTTON", "Р§Р•РўР",
     WS_VISIBLE | WS_CHILD | BS_DEFPUSHBUTTON |WS_TABSTOP,
     NATIS_X, NATIS_Y, NATIS_SHIR, NATIS_VIS, hwnd, (HMENU) ID_NATIS, g_hInst, NULL);
 */
@@ -525,16 +526,16 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 
       break;
 
-	case WM_DROPFILES:	//провлачен свитък
+	case WM_DROPFILES:	//РїСЂРѕРІР»Р°С‡РµРЅ СЃРІРёС‚СЉРє
 	{
-             UINT ifi = 0xFFFFFFFF;     //брой на пуснати свитъци
+             UINT ifi = 0xFFFFFFFF;     //Р±СЂРѕР№ РЅР° РїСѓСЃРЅР°С‚Рё СЃРІРёС‚СЉС†Рё
              UINT buf = 0;
              UINT resu = 0;
              char ime[255];
              LPTSTR imel;
              
-	ifi  = DragQueryFile((HDROP) wParam, 0xFFFFFFFF, &ime[0], buf); //брой свитъци
-	buf  = DragQueryFile((HDROP) wParam, resu, NULL, buf);           // (размер на междината-1)
+	ifi  = DragQueryFile((HDROP) wParam, 0xFFFFFFFF, &ime[0], buf); //Р±СЂРѕР№ СЃРІРёС‚СЉС†Рё
+	buf  = DragQueryFile((HDROP) wParam, resu, NULL, buf);           // (СЂР°Р·РјРµСЂ РЅР° РјРµР¶РґРёРЅР°С‚Р°-1)
 	resu = DragQueryFile((HDROP) wParam, ifi-1, &ime[0], buf+1);
 	strcpy(&pyt[0], &ime[0]);
 	vurti();
@@ -561,10 +562,10 @@ LRESULT CALLBACK WndProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
             case CM_KRATKO:
 MessageBox(0, VUOB_N, ZA_PREH_N, 0);
 
-/*многоезична версия в бъдеще, може би
+/*РјРЅРѕРіРѕРµР·РёС‡РЅР° РІРµСЂСЃРёСЏ РІ Р±СЉРґРµС‰Рµ, РјРѕР¶Рµ Р±Рё
 if (ezik) MessageBox(NULL, VUOB_N, ZA_PREH_N, 0); else
               MessageBox(NULL, VUOB_ENG_N, ZA_PREH_ENG_N, 0);
-//звук - опит PlaySound("n.wav", 0, SND_FILENAME | SND_ASYNC);
+//Р·РІСѓРє - РѕРїРёС‚ PlaySound("n.wav", 0, SND_FILENAME | SND_ASYNC);
 */              break;
 
             case CM_MREJ:
@@ -581,10 +582,10 @@ if (ezik) MessageBox(NULL, VUOB_N, ZA_PREH_N, 0); else
             if (ezik) strcpy(&izbir[0], "MAINMENU");
             else strcpy(&izbir[0],"MAINMENU2");
 
-              DestroyMenu(h_menu);             //унищожаваме избирача
-              h_menu = CreateMenu();           //създаваме нов
-             h_menu = LoadMenu(g_hInst, &izbir[0]);  //запълваме го с данни
-             SetMenu(hwnd, h_menu);     //и го закачаме към главния прозорец
+              DestroyMenu(h_menu);             //СѓРЅРёС‰РѕР¶Р°РІР°РјРµ РёР·Р±РёСЂР°С‡Р°
+              h_menu = CreateMenu();           //СЃСЉР·РґР°РІР°РјРµ РЅРѕРІ
+             h_menu = LoadMenu(g_hInst, &izbir[0]);  //Р·Р°РїСЉР»РІР°РјРµ РіРѕ СЃ РґР°РЅРЅРё
+             SetMenu(hwnd, h_menu);     //Рё РіРѕ Р·Р°РєР°С‡Р°РјРµ РєСЉРј РіР»Р°РІРЅРёСЏ РїСЂРѕР·РѕСЂРµС†
             break;
 
             }
