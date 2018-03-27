@@ -1,0 +1,59 @@
+500 ICON MOVEABLE PURE LOADONCALL DISCARDABLE "C:/DEV-C_~1/BIN/Mainicon.ico"
+ID_BMP BITMAP LOADONCALL MOVEABLE "C:/CPP_moi/8M_C/znaksivo.bmp"
+ID_BMP2 BITMAP LOADONCALL MOVEABLE "C:/CPP_moi/8M_C/nadpis.bmp"
+ID_BMP3 BITMAP LOADONCALL MOVEABLE "C:/CPP_moi/8M_C/znaksivo.bmp"
+#include "Main.h"
+
+
+MAINMENU MENU 
+{
+ POPUP "&Свитък"
+ {
+  MENUITEM "Преобразувай звукозапис...", CM_CHETI_EDIN
+  MENUITEM "Много наведнъж...", CM_CHETI_ZARUKI
+//  MENUITEM "Запиши &Като...", CM_FILE_SAVEAS
+  MENUITEM SEPARATOR
+  MENUITEM "Из&ход", CM_FILE_EXIT
+ }
+
+ POPUP "&Помощ"
+ {
+  MENUITEM "&Прехвърляч-8М", CM_KRATKO
+  MENUITEM "&Какво да правя?", CM_DULGO
+  MENUITEM "&В Мрежата", CM_MREJ
+ }
+
+/*
+ POPUP "&Language"
+ {
+  MENUITEM "&English", CM_EZIK
+ }
+*/
+
+}
+
+/*
+
+MAINMENU2 MENU
+{
+ POPUP "&File"
+ {
+  MENUITEM "&Open record...", CM_CHETI_EDIN
+  MENUITEM "Write info &As...", CM_FILE_SAVEAS
+  MENUITEM SEPARATOR
+  MENUITEM "E&хit", CM_FILE_EXIT
+ }
+
+ POPUP "&Help"
+ {
+  MENUITEM "&Transferrer 0.1", CM_KRATKO
+ }
+
+  POPUP "&Език"
+ {
+  MENUITEM "&Български", CM_EZIK
+ }
+
+}
+
+*/
