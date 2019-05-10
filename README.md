@@ -5,7 +5,7 @@ Transfer diskettes from Apple][ and its clones like Pravetz-8M and 82 through th
 
 Система за предаване на данни между Правец-82/8М (с изход за касетофон) и IBM-PC със звукова платка.
 
-Първа версия: 6.2001; Pascal (MS DOS) и BASIC (Apple DOS 3.3)
+Първа версия: 6.2001; Pascal (MS DOS) и BASIC (Apple DOS 3.3) + RWTS (четене на сектор)
 
 Първа официална: 1.0, 12.2002 (C, MS Windows-32, BASIC)
 
