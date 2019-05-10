@@ -3,13 +3,17 @@ Transfer diskettes from Apple][ and its clones like Pravetz-8M and 82 through th
 
 ПРЕХВЪРЛЯЧ-8М. ВЕРСИЯ 1.1
 
+Автор: Тодор Илиев Арнаудов - Тош/TodProg
+
 Система за предаване на данни между Правец-82/8М (с изход за касетофон) и IBM-PC със звукова платка.
 
 Първа версия: 6.2001; Pascal (MS DOS) и BASIC (Apple DOS 3.3) + RWTS (четене на сектор)
 
-Първа официална: 1.0, 12.2002 (C, MS Windows-32, BASIC)
+Първа публикувана за други потребители ("официална"): 1.0, 12.2002 (C, MS Windows-32, BASIC, RWTS)
 
-Поправка: 1.1, 1.2004 (C, MS Windows-32, BASIC)
+Поправка: 1.1, 1.2004
+
+# Развитие на Windows версията
 
 9.8.2002 - приемане на провлачени записи.
 
@@ -21,4 +25,4 @@ Transfer diskettes from Apple][ and its clones like Pravetz-8M and 82 through th
 
 10.1.2004 - версия 1.1; поправена грешка при декодиране при първи знак; разкрити глаголи (open source)
 
-Автор: Тодор Илиев Арнаудов - Тош/TodProg
+
