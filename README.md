@@ -1,4 +1,13 @@
 # Pravetz8M_Prehvurlyach
+
+ПРЕХВЪРЛЯЧ-8М. ВЕРСИЯ 1.1
+
+![image](https://github.com/Twenkid/Pravetz8M_Prehvurlyach/assets/23367640/859a43e7-e6bb-4c7a-b452-d08817a5c1ac)
+
+* https://eim.twenkid.com/old/preh8m/8m-dulgo.htm
+* https://www.download.bg/index.php?cls=program&mtd=default&id=13598
+* https://www.oocities.org/todprog/preh8m/8m-tech.htm
+
 Transfer diskettes from Apple][ and its clones like Pravetz-8M and 82 through the audio cassette port. Code in C and BASIC. Documentation in HTML.
 
 ПРЕХВЪРЛЯЧ-8М. ВЕРСИЯ 1.1
